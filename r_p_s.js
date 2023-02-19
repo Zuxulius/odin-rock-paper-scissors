@@ -18,14 +18,22 @@ function getComputerChoice() {
 }
 
 function playRound(player_selection, computerSelection) {
-    if ((player_selection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "rock") ||
-    (player_selection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "paper") ||
-    (player_selection.toLowerCase() === "scissors" && computerSelection.toLowerCase() === "scissors")) {
+    const player = player_selection.toLowerCase();
+    const computer = computerSelection.toLowerCase();
+
+    // Handle bad input
+    if (player !== "rock" && player !== "paper" && player !== "scissors") {
+        return "Faulty input. Pick either rock, paper or scissors."
+    }
+
+    if ((player === "rock" && computer === "rock") ||
+    (player === "paper" && computer === "paper") ||
+    (player === "scissors" && computer === "scissors")) {
         return "It's a tie!";
 
-    } else if ((player_selection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissors") ||
-    (player_selection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "rock") ||
-    (player_selection.toLowerCase() === "scissors" && computerSelection.toLowerCase() === "paper")) {
+    } else if ((player === "rock" && computer === "scissors") ||
+    (player === "paper" && computer === "rock") ||
+    (player === "scissors" && computer === "paper")) {
         return "You won!";
 
     } else {
@@ -33,6 +41,6 @@ function playRound(player_selection, computerSelection) {
     }
 }
 
-const player_selection = "rock";
+const player_selection = "RoCk";
 const computerSelection = getComputerChoice();
 console.log(playRound(player_selection, computerSelection));
