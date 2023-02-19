@@ -1,9 +1,4 @@
-// Create a rock paper scissors game running in the console
-
-// Plan:
-// Create array of choices
-// Randomly pick index
-// return item at index from array
+/* A little program to play rock, paper, scissors in the console. */
 
 const choices = ["Rock","Paper","Scissors"];
 
@@ -29,18 +24,26 @@ function playRound(player_selection, computerSelection) {
     if ((player === "rock" && computer === "rock") ||
     (player === "paper" && computer === "paper") ||
     (player === "scissors" && computer === "scissors")) {
-        return "It's a tie!";
+        return `Player chose: ${player}. Computer chose: ${computer}. It's a tie!`;
 
     } else if ((player === "rock" && computer === "scissors") ||
     (player === "paper" && computer === "rock") ||
     (player === "scissors" && computer === "paper")) {
-        return "You won!";
+        return `Player chose: ${player}. Computer chose: ${computer}. You won!`;
 
     } else {
-        return "You lost!";
+        return `Player chose: ${player}. Computer chose: ${computer}. You lose!`;
     }
 }
 
-const player_selection = "RoCk";
-const computerSelection = getComputerChoice();
-console.log(playRound(player_selection, computerSelection));
+function game(rounds) {
+    for (let i = 0; i < rounds; i++) {
+        const player = prompt("Rock, paper, scissors!");
+        const computer = getComputerChoice();
+        console.log(playRound(player, computer));
+    }
+}
+
+const rounds = 5;
+
+game(rounds);
