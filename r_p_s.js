@@ -21,9 +21,7 @@ function playRound(player_selection, computerSelection) {
         return "Faulty input. Pick either rock, paper or scissors."
     }
 
-    if ((player === "rock" && computer === "rock") ||
-    (player === "paper" && computer === "paper") ||
-    (player === "scissors" && computer === "scissors")) {
+    if (player === computer) {
         return `Player chose: ${player}. Computer chose: ${computer}. It's a tie!`;
 
     } else if ((player === "rock" && computer === "scissors") ||
