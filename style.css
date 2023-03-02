@@ -1,0 +1,51 @@
+
+body {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	background-color: #635985;
+}
+
+.container {
+	background-color: #443C68;
+	display: flex;
+	width: 100vw;
+	justify-content: space-evenly;
+}
+
+.pic-container {
+	display: flex;
+	text-align: center;
+	flex-direction: column;
+	color: #18122B;
+}
+
+.img {
+	transition: 400ms ease;
+	width: 30vh;
+	height: 30vh;
+	border-radius: 50%;
+}
+.img:hover {
+	cursor: crosshair;
+	transition: 400ms ease;
+	width: 35vh;
+	height: 35vh;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-style: oblique;
+	font-weight: bold;
+	font-family: "Courier New", monospace;
+	font-size: clamp(2rem, 1vw, 1rem);
+
+}
+
+h1 {
+	text-align: center;
+	font-style: oblique;
+	font-size: clamp(3rem, 2vw, 2rem);
+}
