@@ -1,10 +1,10 @@
 /* A little program to play rock, paper, scissors in the console. */
 
-boulder = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+const boulder = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
 
-papyrus = "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+const papyrus = "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
 
-cutters = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"; 
+const cutters = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"; 
 
 const choices = [boulder, papyrus, cutters];
 
@@ -23,16 +23,16 @@ function getComputerChoice() {
 //     const computer = computerSelection.toLowerCase();
 //
 //     // Handle bad input
-//     if (player !== "rock" && player !== "paper" && player !== "scissors") {
+//     if (player !== boulder && player !== papyrus && player !== cutters) {
 //         return "Faulty input. Pick either rock, paper or scissors."
 //     }
 //
 //     if (player === computer) {
 //         return `Player chose: ${player}. Computer chose: ${computer}. It's a tie!`;
 //
-//     } else if ((player === "rock" && computer === "scissors") ||
-//     (player === "paper" && computer === "rock") ||
-//     (player === "scissors" && computer === "paper")) {
+//     } else if ((player === boulder && computer === cutters) ||
+//     (player === papyrus && computer === boulder) ||
+//     (player === cutters && computer === papyrus)) {
 //         return `Player chose: ${player}. Computer chose: ${computer}. You won!`;
 //
 //     } else {
@@ -53,42 +53,70 @@ function getComputerChoice() {
 // game(rounds);
 
 function removeImgs() {
-    const x = document.querySelectorAll("img");
-    for (img of x) {
+    let imgs = document.querySelectorAll("img");
+    for (img of imgs) {
         img.parentNode.remove();
     }
 }
 
-function add_competitors(player, computer) {
+function set_stage(player, computer) {
     div = document.querySelector("div");
 
     playah = document.createElement('img');
     playah.src = player;
     playah.className = "competitors";
 
-    computah = document.createElement('img')
+    computah = document.createElement('img');
     computah.src = computer;
     computah.className = "competitors";
 
+    removeImgs();
+    document.querySelector('h1').remove();
+
+    h1 = document.createElement('h1');
+    h1.textContent = playRound(player, computer);
+
+    button = document.createElement('button');
+    button.textContent = 'Play again?';
+
+    div.insertAdjacentElement('beforebegin', h1);
+    div.insertAdjacentElement('afterend', button);
     div.appendChild(playah);
     div.appendChild(computah);
+
+    button.addEventListener('click', playAgain);
+
 }
 
 function choose(e) {
     const clickedImg = e.target;
     const player = clickedImg.src;
-    removeImgs();
-    document.querySelector('h1').remove();
-    add_competitors(player, computer);
-
+    set_stage(player, computer);
     }
 
-const imgs = document.getElementsByClassName("img");
+function playRound(player, computer) {
+    if (player === computer) return 'BOOOO!'
+    if ( (player === boulder && computer === cutters) ||
+    (player === papyrus && computer === boulder) ||
+    (player === cutters && computer === papyrus)) {
+        return "You win!"
+    } else return "You lose!"
+};
 
+function playAgain() {
+    computer = getComputerChoice();
+    document.body.replaceWith(clone);
+    for (img of imgs) {
+        img.addEventListener('click', choose)
+}
+}
+
+let clone = document.body.cloneNode(true);
+
+let imgs = document.getElementsByClassName("img");
 let computer = getComputerChoice();
 
 for (img of imgs) {
     img.addEventListener('click', choose)
-};
-
+}
 
