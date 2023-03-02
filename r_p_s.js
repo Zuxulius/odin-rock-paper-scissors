@@ -46,15 +46,43 @@
 //
 // game(rounds);
 
-const imgs = document.getElementsByClassName("pic-container");
-    
+const imgs = document.getElementsByClassName("img");
+
+function removeImgs() {
+    const x = document.querySelectorAll("img");
+    for (img of x) {
+        img.parentNode.remove();
+    }
+}
+
+function add_competitors(src1, src2) {
+    div = document.querySelector("div");
+
+    comp1 = document.createElement('img');
+    comp1.src = src1;
+    // comp1.src = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
+    comp1.className = "competitors";
+
+    comp2 = document.createElement('img')
+    comp2.src = src2;
+    // comp2.src = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80";
+    comp2.className = "competitors";
+
+    div.appendChild(comp1);
+    div.appendChild(comp2);
+}
+
 function choose(e) {
     const clickedImg = e.target;
-    clickedImg.style.width = "35vh";
-    clickedImg.style.height = "35vh";
-    
-}
+    const src1 = clickedImg.src;
+    removeImgs();
+    add_competitors(src1, src2);
+    }
+
+let src2 = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
 
 for (img of imgs) {
     img.addEventListener('click', choose)
 };
+
+

@@ -33,6 +33,12 @@ body {
 	height: 35vh;
 }
 
+.competitors {
+	width: 30vh;
+	height: 30vh;
+	border-radius: 50%;
+}
+
 p {
 	margin: 0;
 	padding: 0;
