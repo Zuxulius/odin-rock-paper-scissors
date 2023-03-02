@@ -60,12 +60,15 @@ function playRound(player, computer) {
     (player === papyrus && computer === boulder) ||
     (player === cutters && computer === papyrus)) {
         pScore++;
-        // sound = document.createElement('audio');
-        // sound.src = "pomotimer-end.wav"
-        // sound.play();
+        sound = document.createElement('audio');
+        sound.src = mappings[player];
+        sound.play();
         return `You win!<br>Player ${pScore} - ${cScore} Computer`;
     } else {
         cScore++;
+        sound = document.createElement('audio');
+        sound.src = mappings[computer];
+        sound.play();
         return `You lose!<br>Player ${pScore} - ${cScore} Computer`;
     }
 }
@@ -108,7 +111,11 @@ const choices = [boulder, papyrus, cutters];
 
 const mappings = {
     pScore: 'Player', 
-    cScore: 'Computer'};
+    cScore: 'Computer',
+    "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80": 'sounds/papyrus.wav',
+    "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80": 'sounds/boulder.wav',
+    "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80": 'sounds/scissors.wav'    
+};
 
 let pScore = 0;
 let cScore = 0;
@@ -119,8 +126,4 @@ let computer = getComputerChoice();
 for (img of imgs) {
     img.addEventListener('click', choose)
 }
-
-// while (pScore < 5 && cScore < 5) {
-//     continue
-// }
 
