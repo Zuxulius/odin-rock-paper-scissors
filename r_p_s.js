@@ -1,16 +1,22 @@
 /* A little program to play rock, paper, scissors in the console. */
 
-// const choices = ["Boulder","Papyrus","Cutters"];
-//
-// function getComputerChoice() {
-//     // Math.random gives number between 0 and 1, not including 1
-//     // Multiplying that by the length of the array gives you any number
-//     // between 0 and length of array.
-//     // Flooring it gives you an integer between 0(inclusive)
-//     // and the length of the array (non inclusive)
-//     let choice = Math.floor(Math.random() * choices.length);
-//     return choices[choice];
-// }
+boulder = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+
+papyrus = "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80";
+
+cutters = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"; 
+
+const choices = [boulder, papyrus, cutters];
+
+function getComputerChoice() {
+    // Math.random gives number between 0 and 1, not including 1
+    // Multiplying that by the length of the array gives you any number
+    // between 0 and length of array.
+    // Flooring it gives you an integer between 0(inclusive)
+    // and the length of the array (non inclusive)
+    let choice = Math.floor(Math.random() * choices.length);
+    return choices[choice];
+}
 //
 // function playRound(player_selection, computerSelection) {
 //     const player = player_selection.toLowerCase();
@@ -46,8 +52,6 @@
 //
 // game(rounds);
 
-const imgs = document.getElementsByClassName("img");
-
 function removeImgs() {
     const x = document.querySelectorAll("img");
     for (img of x) {
@@ -55,31 +59,33 @@ function removeImgs() {
     }
 }
 
-function add_competitors(src1, src2) {
+function add_competitors(player, computer) {
     div = document.querySelector("div");
 
-    comp1 = document.createElement('img');
-    comp1.src = src1;
-    // comp1.src = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
-    comp1.className = "competitors";
+    playah = document.createElement('img');
+    playah.src = player;
+    playah.className = "competitors";
 
-    comp2 = document.createElement('img')
-    comp2.src = src2;
-    // comp2.src = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80";
-    comp2.className = "competitors";
+    computah = document.createElement('img')
+    computah.src = computer;
+    computah.className = "competitors";
 
-    div.appendChild(comp1);
-    div.appendChild(comp2);
+    div.appendChild(playah);
+    div.appendChild(computah);
 }
 
 function choose(e) {
     const clickedImg = e.target;
-    const src1 = clickedImg.src;
+    const player = clickedImg.src;
     removeImgs();
-    add_competitors(src1, src2);
+    document.querySelector('h1').remove();
+    add_competitors(player, computer);
+
     }
 
-let src2 = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
+const imgs = document.getElementsByClassName("img");
+
+let computer = getComputerChoice();
 
 for (img of imgs) {
     img.addEventListener('click', choose)

@@ -21,7 +21,7 @@ body {
 }
 
 .img {
-	transition: 400ms ease;
+	transition: 800ms ease;
 	width: 30vh;
 	height: 30vh;
 	border-radius: 50%;
@@ -34,9 +34,19 @@ body {
 }
 
 .competitors {
+	animation: show 1000ms 100ms forwards;
+	opacity: 0;
 	width: 30vh;
 	height: 30vh;
 	border-radius: 50%;
+	background-color: black;
+	padding: 10px;
+}
+
+@keyframes show {
+	100% {
+		opacity: 1;
+	}
 }
 
 p {
