@@ -78,3 +78,22 @@ h1 {
 	font-style: oblique;
 	font-size: clamp(3rem, 2vw, 2rem);
 }
+
+button {
+	transition: 400ms ease;
+	background-color: darkslategrey;
+	padding: 1vh;
+	color: lightcyan;
+	border-radius: 1vh;
+	margin-top: 3vh;
+}
+
+button:hover {
+	transition: 400ms ease;
+	background-color: darkkhaki;
+	cursor: pointer;
+	padding: 2vh;
+	color: cyan;
+}
+
+
