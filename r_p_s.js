@@ -92,7 +92,7 @@ function choose(e) {
     const clickedImg = e.target;
     const player = clickedImg.src;
     set_stage(player, computer);
-    }
+}
 
 function playRound(player, computer) {
     if (player === computer) return 'BOOOO!'
@@ -101,18 +101,23 @@ function playRound(player, computer) {
     (player === cutters && computer === papyrus)) {
         return "You win!"
     } else return "You lose!"
-};
+}
 
 function playAgain() {
-    computer = getComputerChoice();
-    document.body.replaceWith(clone);
-    for (img of imgs) {
-        img.addEventListener('click', choose)
-}
+    if (playing < 4) {
+        document.body.innerHTML = index;
+        for (img of imgs) {
+            img.addEventListener('click', choose)
+        }
+        computer = getComputerChoice();
+        playing++;
+    } else {
+        // Game is finished.
+    }
 }
 
-let clone = document.body.cloneNode(true);
-
+let index = document.body.innerHTML;
+let playing = 0;
 let imgs = document.getElementsByClassName("img");
 let computer = getComputerChoice();
 
