@@ -95,29 +95,45 @@ function choose(e) {
 }
 
 function playRound(player, computer) {
-    if (player === computer) return 'BOOOO!'
+    if (player === computer) return "Booo, it's a tie.."
     if ( (player === boulder && computer === cutters) ||
     (player === papyrus && computer === boulder) ||
     (player === cutters && computer === papyrus)) {
+        pScore++;
+        sound = document.createElement('audio');
+        sound.src = "pomotimer-end.wav"
+        sound.play();
         return "You win!"
-    } else return "You lose!"
+    } else {
+        cScore++;
+        return "You lose!"
+    }
 }
 
 function playAgain() {
-    if (playing < 4) {
+    if (pScore < 5 && cScore < 5) {
         document.body.innerHTML = index;
+        head = document.querySelector('h1');
+        head.textContent = `Player ${pScore} - ${cScore} Computer`;
+        // h1 = document.createElement('h1');
+        // h1.textContent = `Player: ${pScore} - Computer: ${cScore}`;
+        // document.body.insertAdjacentElement('afterbegin', h1);
         for (img of imgs) {
             img.addEventListener('click', choose)
         }
         computer = getComputerChoice();
-        playing++;
     } else {
         // Game is finished.
     }
 }
 
+function reset() {
+
+}
+
+let pScore = 0;
+let cScore = 0;
 let index = document.body.innerHTML;
-let playing = 0;
 let imgs = document.getElementsByClassName("img");
 let computer = getComputerChoice();
 
@@ -125,3 +141,6 @@ for (img of imgs) {
     img.addEventListener('click', choose)
 }
 
+// Add scoreboard and logic for score.
+// Add reset button and logic/functionality.
+// Style buttons
