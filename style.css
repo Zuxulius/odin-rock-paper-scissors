@@ -1,6 +1,6 @@
 
 body {
-	animation: show 2000ms 100ms forwards;
+	animation: show 1000ms 100ms forwards;
 	opacity: 0;
 	margin: 0;
 	padding: 0;
@@ -72,6 +72,8 @@ p {
 }
 
 h1 {
+	animation: show 1000ms 100ms forwards;
+	opacity: 0;
 	text-align: center;
 	font-style: oblique;
 	font-size: clamp(3rem, 2vw, 2rem);

@@ -71,20 +71,22 @@ function set_stage(player, computer) {
     computah.className = "competitors";
 
     removeImgs();
-    document.querySelector('h1').remove();
-
-    h1 = document.createElement('h1');
-    h1.textContent = playRound(player, computer);
+    h1 = document.querySelector('h1');
+    h1.innerHTML = playRound(player, computer);
 
     button = document.createElement('button');
     button.textContent = 'Play again?';
+    button2 = document.createElement('button');
+    button2.textContent = 'Reset score'
 
     div.insertAdjacentElement('beforebegin', h1);
+    div.insertAdjacentElement('afterend', button2);
     div.insertAdjacentElement('afterend', button);
     div.appendChild(playah);
     div.appendChild(computah);
 
     button.addEventListener('click', playAgain);
+    button2.addEventListener('click', reset);
 
 }
 
@@ -100,13 +102,13 @@ function playRound(player, computer) {
     (player === papyrus && computer === boulder) ||
     (player === cutters && computer === papyrus)) {
         pScore++;
-        sound = document.createElement('audio');
-        sound.src = "pomotimer-end.wav"
-        sound.play();
-        return "You win!"
+        // sound = document.createElement('audio');
+        // sound.src = "pomotimer-end.wav"
+        // sound.play();
+        return `You win!<br>Player ${pScore} - ${cScore} Computer`;
     } else {
         cScore++;
-        return "You lose!"
+        return `You lose!<br>Player ${pScore} - ${cScore} Computer`;
     }
 }
 
@@ -115,11 +117,9 @@ function playAgain() {
         document.body.innerHTML = index;
         head = document.querySelector('h1');
         head.textContent = `Player ${pScore} - ${cScore} Computer`;
-        // h1 = document.createElement('h1');
-        // h1.textContent = `Player: ${pScore} - Computer: ${cScore}`;
-        // document.body.insertAdjacentElement('afterbegin', h1);
+
         for (img of imgs) {
-            img.addEventListener('click', choose)
+            img.addEventListener('click', choose);
         }
         computer = getComputerChoice();
     } else {
@@ -128,7 +128,13 @@ function playAgain() {
 }
 
 function reset() {
-
+    document.body.innerHTML = index;
+    pScore = 0;
+    cScore = 0;
+    
+    for (img of imgs) {
+        img.addEventListener('click', choose);
+    }
 }
 
 let pScore = 0;
