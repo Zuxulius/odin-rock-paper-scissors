@@ -75,8 +75,8 @@ function playAgain() {
     if (pScore < 5 && cScore < 5) {
         document.body.innerHTML = index;
         const checkbox = document.querySelector('input');
-        checkbox.addEventListener('input', mute);
-        if (papyrus_sound.volume === 0) {checkbox.remove()};
+        (papyrus_sound.volume === 0) ? checkbox.checked=true: checkbox.checked=false;
+        checkbox.addEventListener('input', volume);
         head = document.querySelector('h1');
         head.textContent = `Player ${pScore} - ${cScore} Computer`;
 
@@ -97,8 +97,8 @@ function playAgain() {
 function reset() {
     document.body.innerHTML = index;
     const checkbox = document.querySelector('input');
-    checkbox.addEventListener('input', mute);
-    if (papyrus_sound.volume === 0) {checkbox.remove()};
+    (papyrus_sound.volume === 0) ? checkbox.checked=true: checkbox.checked=false;
+    checkbox.addEventListener('input', volume);
     pScore = 0;
     cScore = 0;
     
@@ -107,11 +107,18 @@ function reset() {
     }
 }
 
-function mute () {
+function volume () {
+    if (papyrus_sound.volume === 0) {
+        papyrus_sound.volume = 0.2;
+        boulder_sound.volume = 0.2;
+        cutters_sound.volume = 0.2;
+        lil_pad_sound.volume = 0.2;
+    } else {
     papyrus_sound.volume = 0;
     boulder_sound.volume = 0;
     cutters_sound.volume = 0;
     lil_pad_sound.volume = 0;
+    }
 }
 
 const boulder = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
@@ -126,13 +133,13 @@ const papyrus_sound = document.getElementById('papyrus');
 const boulder_sound = document.getElementById('boulder');
 const cutters_sound = document.getElementById('cutters');
 const lil_pad_sound = document.getElementById('finish');
-papyrus_sound.volume = 0.1;
-boulder_sound.volume = 0.1;
-cutters_sound.volume = 0.1;
-lil_pad_sound.volume = 0.1;
+papyrus_sound.volume = 0.2;
+boulder_sound.volume = 0.2;
+cutters_sound.volume = 0.2;
+lil_pad_sound.volume = 0.2;
 
 const checkbox = document.querySelector('input');
-checkbox.addEventListener('input', mute);
+checkbox.addEventListener('input', volume);
 
 const mappings = {
     pScore: 'Player', 
