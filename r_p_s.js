@@ -95,6 +95,7 @@ function playAgain() {
 }
 
 function reset() {
+    computer = getComputerChoice();
     document.body.innerHTML = index;
     const checkbox = document.querySelector('input');
     (papyrus_sound.volume === 0) ? checkbox.checked=true: checkbox.checked=false;
