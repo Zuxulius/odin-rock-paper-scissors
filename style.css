@@ -76,7 +76,8 @@ h1 {
 	opacity: 0;
 	text-align: center;
 	font-style: oblique;
-	font-size: clamp(3rem, 2vw, 2rem);
+	/* font-size: clamp(3rem, 2vw, 2rem); */
+	font-size: 7vh;
 }
 
 button {
@@ -106,7 +107,7 @@ footer {
 
 footer > p {
 	transition: 400ms ease;
-	font-size: 8px;
+	font-size: 1vh;
 }
 
 footer > p:hover {
