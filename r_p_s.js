@@ -1,11 +1,11 @@
-/* A little program to play rock, paper, scissors in the console. */
+/* A little rock-paper-scissors game. */
 
 function getComputerChoice() {
-    // Math.random gives number between 0 and 1, not including 1
-    // Multiplying that by the length of the array gives you any number
-    // between 0 and length of array.
-    // Flooring it gives you an integer between 0(inclusive)
-    // and the length of the array (non inclusive)
+    /* Math.random gives a number between 0 and 1, not including 1.
+    Multiplying that by the length of the array gives you any number -
+    between 0 and length of array.
+    Flooring it gives you an integer between 0(inclusive) -
+    and the length of the array (non inclusive). */
     let choice = Math.floor(Math.random() * choices.length);
     return choices[choice];
 }
@@ -56,19 +56,17 @@ function choose(e) {
 
 function playRound(player, computer) {
     if (player === computer) return `${pScore}-${cScore}<br>Booo, it's a tie..`
+    
     if ( (player === boulder && computer === cutters) ||
     (player === papyrus && computer === boulder) ||
     (player === cutters && computer === papyrus)) {
         pScore++;
-        sound = document.createElement('audio');
-        sound.src = mappings[player];
-        sound.play();
+        mappings[player].play();
         return `You win!<br>Player ${pScore} - ${cScore} Computer`;
+
     } else {
         cScore++;
-        sound = document.createElement('audio');
-        sound.src = mappings[computer];
-        sound.play();
+        mappings[computer].play();
         return `You lose!<br>Player ${pScore} - ${cScore} Computer`;
     }
 }
@@ -76,6 +74,9 @@ function playRound(player, computer) {
 function playAgain() {
     if (pScore < 5 && cScore < 5) {
         document.body.innerHTML = index;
+        const checkbox = document.querySelector('input');
+        checkbox.addEventListener('input', mute);
+        if (papyrus_sound.volume === 0) {checkbox.remove()};
         head = document.querySelector('h1');
         head.textContent = `Player ${pScore} - ${cScore} Computer`;
 
@@ -88,17 +89,29 @@ function playAgain() {
         winner = pScore > cScore ? mappings.pScore: mappings.cScore;
         head.innerHTML = `${winner} is victorious!<br>Player ${pScore} - ${cScore} Computer`;
         document.querySelector('button').remove();
+        
+        lil_pad_sound.play();
     }
 }
 
 function reset() {
     document.body.innerHTML = index;
+    const checkbox = document.querySelector('input');
+    checkbox.addEventListener('input', mute);
+    if (papyrus_sound.volume === 0) {checkbox.remove()};
     pScore = 0;
     cScore = 0;
     
     for (img of imgs) {
         img.addEventListener('click', choose);
     }
+}
+
+function mute () {
+    papyrus_sound.volume = 0;
+    boulder_sound.volume = 0;
+    cutters_sound.volume = 0;
+    lil_pad_sound.volume = 0;
 }
 
 const boulder = "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80";
@@ -109,12 +122,24 @@ const cutters = "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ix
 
 const choices = [boulder, papyrus, cutters];
 
+const papyrus_sound = document.getElementById('papyrus');
+const boulder_sound = document.getElementById('boulder');
+const cutters_sound = document.getElementById('cutters');
+const lil_pad_sound = document.getElementById('finish');
+papyrus_sound.volume = 0.1;
+boulder_sound.volume = 0.1;
+cutters_sound.volume = 0.1;
+lil_pad_sound.volume = 0.1;
+
+const checkbox = document.querySelector('input');
+checkbox.addEventListener('input', mute);
+
 const mappings = {
     pScore: 'Player', 
     cScore: 'Computer',
-    "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80": 'sounds/papyrus.wav',
-    "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80": 'sounds/boulder.wav',
-    "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80": 'sounds/scissors.wav'    
+    "https://images.unsplash.com/photo-1655923478826-ef7c2d40820e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80": papyrus_sound,
+    "https://images.unsplash.com/photo-1525857597365-5f6dbff2e36e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80": boulder_sound,
+    "https://images.unsplash.com/photo-1621446113284-53ca198c7fa7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80": cutters_sound
 };
 
 let pScore = 0;
